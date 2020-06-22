@@ -1,58 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import { loadMovies } from './app/movies/actions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  componentDidMount() {
+    this.props.loadMovies();
+  }
+
+  searchHandler = (e) => {
+    e.preventDefault();
+    const [input] = e.target;
+    debugger;
+    this.props.loadMovies({ query: input.value });
+    e.target[0].value = '';
+
+  }
+  checkMovie = (e) => {
+    window.location.href = 'https://www.themoviedb.org/movie'
+  }
+
+  render() {
+
+    return (
+      <div>
+        <h3 className='search'>Movie search</h3>
+        <form onSubmit={this.searchHandler} >
+          <input placeholder="Start enter movies name to search" />
+        </form>
+        <div>
+          {this.props.moviesList.map(item => (
+            <div key={item.id} className='movie-block'>
+              <img alt='poster' src='http://image.tmdb.org/t/p/w500/rfxvoRoZtBLUXJqLf8z9kgJWkKt.jpg'></img>
+              <div className='movie-info'>
+                <h4 className='movie-title'>Movie title:{item.original_title}</h4>
+                <p className='movie-rating'>Movie rating:{item.vote_average}</p>
+                <p className='movie-descr'> Movie description:{item.overview}</p>
+                <p className='movie-data'>Movie data release:{item.release_date}</p>
+                <button onClick={this.checkMovie}>Check movie</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div >
+    );
+  }
+
 }
 
-export default App;
+export default connect(({ movies }) => ({
+  moviesList: movies.list
+}), { loadMovies })(App);
