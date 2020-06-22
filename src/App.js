@@ -17,9 +17,8 @@ class App extends Component {
     e.target[0].value = '';
 
   }
-  checkMovie = (e) => {
-    window.location.href = 'https://www.themoviedb.org/movie'
-  }
+
+
 
   render() {
 
@@ -32,16 +31,19 @@ class App extends Component {
         <div>
           {this.props.moviesList.map(item => (
             <div key={item.id} className='movie-block'>
-              <img alt='poster' src='http://image.tmdb.org/t/p/w500/rfxvoRoZtBLUXJqLf8z9kgJWkKt.jpg'></img>
+              <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}></img>
               <div className='movie-info'>
                 <h4 className='movie-title'>Movie title:{item.original_title}</h4>
                 <p className='movie-rating'>Movie rating:{item.vote_average}</p>
                 <p className='movie-descr'> Movie description:{item.overview}</p>
                 <p className='movie-data'>Movie data release:{item.release_date}</p>
-                <button onClick={this.checkMovie}>Check movie</button>
+                <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/movie/${item.id}`}>
+                  <button>Check movie</button>
+                </a>
               </div>
-            </div>
-          ))}
+            </div >
+          ))
+          }
         </div>
       </div >
     );
