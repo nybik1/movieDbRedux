@@ -1,0 +1,14 @@
+.movie-block{
+    max-width: 230px;
+    margin-bottom: 20px;
+}
+.movie-block img {
+    max-width: 100%;
+}
+
+.movie-info{
+    color: #fff;
+}
+.movie-title{
+    color: #fff;
+}

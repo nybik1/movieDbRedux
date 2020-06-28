@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { Pagination, Spin } from 'antd';
 import { connect } from 'react-redux';
 import './App.css';
-import { loadMovies } from './app/movies/actions';
+import { loadMovies, searchMovies, } from './app/movies/actions';
+import {
+  BrowserRouter as Router, Switch, Route,
+} from "react-router-dom";
+import MovieItem from './components/movieItem';
+
 
 class App extends Component {
 
@@ -12,45 +18,56 @@ class App extends Component {
   searchHandler = (e) => {
     e.preventDefault();
     const [input] = e.target;
-    debugger;
-    this.props.loadMovies({ query: input.value });
+    this.props.searchMovies({
+      query: input.value,
+    });
     e.target[0].value = '';
+  }
 
+  handlePageChange = (page, itemsCount) => {
+    this.props.loadMovies({ page })
   }
 
 
 
   render() {
-
+    const { loading, error, total } = this.props;
     return (
       <div>
-        <h3 className='search'>Movie search</h3>
-        <form onSubmit={this.searchHandler} >
-          <input placeholder="Start enter movies name to search" />
-        </form>
-        <div>
-          {this.props.moviesList.map(item => (
-            <div key={item.id} className='movie-block'>
-              <img alt='poster' src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}></img>
-              <div className='movie-info'>
-                <h4 className='movie-title'>Movie title:{item.original_title}</h4>
-                <p className='movie-rating'>Movie rating:{item.vote_average}</p>
-                <p className='movie-descr'> Movie description:{item.overview}</p>
-                <p className='movie-data'>Movie data release:{item.release_date}</p>
-                <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/movie/${item.id}`}>
-                  <button>Check movie</button>
-                </a>
-              </div>
-            </div >
-          ))
-          }
+        <div className='search'>
+          <h3 className='search__title'>Movie search</h3>
+          <form onSubmit={this.searchHandler} >
+            <input className='search__input' placeholder="Start enter movies name to search" />
+          </form>
         </div>
+        <Router>
+          <div className='container'>
+            {loading && <Spin />}
+            {error && <h3>${error}</h3>}
+            {!loading && this.props.moviesList.map(item => (
+              <MovieItem key={item.id}
+                title={item.original_title} rating={item.vote_average}
+                description={item.overview} date={item.release_date} descr={item.overview} poster={item.poster_path} movieLink={item.id}>
+              </MovieItem>
+            ))}
+          </div>
+          <Switch>
+            <Route path='/' exact></Route>
+            <Route></Route>
+          </Switch>
+        </Router>
+        <Pagination defaultCurrent={1} total={total} pageSize={20} onChange={this.handlePageChange} />
       </div >
     );
   }
 
 }
 
-export default connect(({ movies }) => ({
-  moviesList: movies.list
-}), { loadMovies })(App);
+export default connect(({ movies: { list, loading, error, total } }) => ({
+  moviesList: list,
+  loading,
+  error,
+  total,
+
+
+}), { loadMovies, searchMovies, })(App);
