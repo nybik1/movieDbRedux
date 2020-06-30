@@ -6,11 +6,11 @@ import { loadMovies, searchMovies, } from './app/movies/actions';
 import {
   BrowserRouter as Router, Switch, Route,
 } from "react-router-dom";
-import MovieItem from './components/movieItem';
+import MovieList from './components/MovieList';
+import MovieDetails from './components/MovieDetails';
 
 
 class App extends Component {
-
   componentDidMount() {
     this.props.loadMovies();
   }
@@ -24,7 +24,7 @@ class App extends Component {
     e.target[0].value = '';
   }
 
-  handlePageChange = (page, itemsCount) => {
+  handlePageChange = (page) => {
     this.props.loadMovies({ page })
   }
 
@@ -33,41 +33,36 @@ class App extends Component {
   render() {
     const { loading, error, total } = this.props;
     return (
-      <div>
-        <div className='search'>
-          <h3 className='search__title'>Movie search</h3>
-          <form onSubmit={this.searchHandler} >
-            <input className='search__input' placeholder="Start enter movies name to search" />
-          </form>
-        </div>
-        <Router>
-          <div className='container'>
+      <Router>
+        <div>
+          <div className='search'>
+            <h3 className='search__title'>Movie search</h3>
+            <form onSubmit={this.searchHandler} >
+              <input className='search__input' placeholder="Start enter movies name to search" />
+            </form>
+          </div>
+          <React.Fragment>
+            {/* <div className='container'>
             {loading && <Spin />}
             {error && <h3>${error}</h3>}
-            {!loading && this.props.moviesList.map(item => (
-              <MovieItem key={item.id}
-                title={item.original_title} rating={item.vote_average}
-                description={item.overview} date={item.release_date} descr={item.overview} poster={item.poster_path} movieLink={item.id}>
-              </MovieItem>
-            ))}
-          </div>
-          <Switch>
-            <Route path='/' exact></Route>
-            <Route></Route>
-          </Switch>
-        </Router>
-        <Pagination defaultCurrent={1} total={total} pageSize={20} onChange={this.handlePageChange} />
-      </div >
+            {!loading && <MovieList></MovieList>}
+          </div> */}
+          </React.Fragment>
+          <Route path='/' exact component={MovieList} />
+          <Route path='/movie/:id' exact component={MovieDetails} />
+          <Pagination defaultCurrent={1} total={total} pageSize={20} onChange={this.handlePageChange} />
+
+        </div >
+      </Router>
     );
   }
 
 }
 
-export default connect(({ movies: { list, loading, error, total } }) => ({
-  moviesList: list,
+export default connect(({ movies: { loading, error, total } }) => ({
   loading,
   error,
   total,
 
 
-}), { loadMovies, searchMovies, })(App);
+}), { loadMovies, searchMovies, })(App);  

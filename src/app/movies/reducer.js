@@ -2,6 +2,7 @@ import {
     LOAD_MOVIES_PENDING,
     LOAD_MOVIES_FULFILLED,
     LOAD_MOVIES_REJECTED,
+    GET_MOVIE
 } from './actions';
 import { SEARCH_MOVIES } from './actions';
 
@@ -13,6 +14,7 @@ const initialState = {
     loading: false,
     error: null,
     total: 0,
+    movie: {}
 }
 
 function movies(state = initialState, action) {
@@ -43,6 +45,11 @@ function movies(state = initialState, action) {
                 list: action.payload.items,
                 total: action.payload.total,
                 loading: false,
+            }
+        case GET_MOVIE:
+            return {
+                ...state,
+                movie: action.payload
             }
         default:
             return state

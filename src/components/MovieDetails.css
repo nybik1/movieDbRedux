@@ -1,0 +1,16 @@
+.movie{
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.movie__info {
+    display: flex;
+    flex-direction: column;
+    font-size: 36px;
+    margin-left: 20px;
+}
+
+.movie__title {
+    color: white;
+}

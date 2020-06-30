@@ -1,10 +1,9 @@
-
 import axios from 'axios';
 export const LOAD_MOVIES_PENDING = 'movies/LOAD_MOVIES_PENDING';
 export const LOAD_MOVIES_FULFILLED = 'movies/LOAD_MOVIES_FULFILLED';
 export const LOAD_MOVIES_REJECTED = 'movies/LOAD_MOVIES_REJECTED';
 export const SEARCH_MOVIES = 'movies/SEARCH_MOVIES';
-export const MOVIE_DETAILS = 'movies/MOVIE_DETAILS';
+export const GET_MOVIE = 'movies/GET_MOVIE';
 
 
 
@@ -26,7 +25,7 @@ export const loadMovies = ({ page } = {}) => (dispatch) => {
 }
 
 
-export const searchMovies = ({ query = 'avengers', page } = {}) => (dispatch) => {
+export const searchMovies = ({ query, page } = {}) => (dispatch) => {
     axios(`https://api.themoviedb.org/3/search/movie?api_key=4fbb4691e328ec322d3358761a861113&page=${page}&query=${query}`)
         .then(({ data }) => {
             dispatch({
@@ -37,6 +36,18 @@ export const searchMovies = ({ query = 'avengers', page } = {}) => (dispatch) =>
             })
         })
 }
+
+
+export const getMovie = (id) => (dispatch) => {
+    axios(`https://api.themoviedb.org/3/movie/${id}?api_key=4fbb4691e328ec322d3358761a861113`)
+        .then(({ data }) => {
+            dispatch({
+                type: GET_MOVIE,
+                payload: data
+            })
+        })
+}
+
 
 
 
