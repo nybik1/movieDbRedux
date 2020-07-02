@@ -8,9 +8,18 @@ import {
 } from "react-router-dom";
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
+import Nav from './components/Nav';
+import About from './components/About';
+
+
 
 
 class App extends Component {
+
+  state = {
+    isSearch: false
+  }
+
   componentDidMount() {
     this.props.loadMovies();
   }
@@ -22,10 +31,16 @@ class App extends Component {
       query: input.value,
     });
     e.target[0].value = '';
+    this.setState({ isSearch: true });
   }
 
   handlePageChange = (page) => {
+    document.body.scrollIntoView();
+    if (this.state.isSearch) {
+      return this.props.searchMovies()
+    }
     this.props.loadMovies({ page })
+
   }
 
 
@@ -34,6 +49,7 @@ class App extends Component {
     const { loading, error, total } = this.props;
     return (
       <Router>
+        <Nav />
         <div>
           <div className='search'>
             <h3 className='search__title'>Movie search</h3>
@@ -50,6 +66,7 @@ class App extends Component {
           </React.Fragment>
           <Route path='/' exact component={MovieList} />
           <Route path='/movie/:id' exact component={MovieDetails} />
+          <Route path='/about' exact component={About} />
           <Pagination defaultCurrent={1} total={total} pageSize={20} onChange={this.handlePageChange} />
 
         </div >

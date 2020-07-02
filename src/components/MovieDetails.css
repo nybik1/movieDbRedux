@@ -2,15 +2,46 @@
     color: white;
     display: flex;
     flex-direction: row;
+    padding: 0 10px;
 }
 
 .movie__info {
     display: flex;
     flex-direction: column;
     font-size: 36px;
-    margin-left: 20px;
 }
 
 .movie__title {
     color: white;
 }
+
+.movie__wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    
+}
+
+.movie__images{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.movie__wrapper{
+    display: flex;
+    max-height: 750px;
+    overflow: hidden;
+}
+
+.movie__btn-back{
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

@@ -1,6 +1,10 @@
 .movie-block{
-    max-width: 230px;
+    max-width: 250px;
+    height: 750px;
     margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 1%;
 }
 .movie-block img {
     max-width: 100%;
@@ -11,4 +15,18 @@
 }
 .movie-title{
     color: #fff;
+    text-align: center;
+}
+
+.movie-descr{
+    height: 200px;
+    overflow: hidden;
+    color: #fff;
+    text-overflow: ellipsis;
+}
+
+.movie__button-wrapper{
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
 }
