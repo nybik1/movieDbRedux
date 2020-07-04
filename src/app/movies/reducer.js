@@ -14,7 +14,8 @@ const initialState = {
     loading: false,
     error: null,
     total: 0,
-    movie: {}
+    movie: {},
+    isSearch: false,
 }
 
 function movies(state = initialState, action) {
@@ -25,6 +26,7 @@ function movies(state = initialState, action) {
                 list: action.payload.items,
                 total: action.payload.total,
                 loading: false,
+                isSearch: false,
             }
         case LOAD_MOVIES_PENDING:
             return {
@@ -45,6 +47,7 @@ function movies(state = initialState, action) {
                 list: action.payload.items,
                 total: action.payload.total,
                 loading: false,
+                isSearch: true,
             }
         case GET_MOVIE:
             return {

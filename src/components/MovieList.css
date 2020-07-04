@@ -5,3 +5,12 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.spinner{
+    text-align: center;
+    margin: auto;
+}
+.pagination{
+    text-align: center;
+    margin: auto;
+}

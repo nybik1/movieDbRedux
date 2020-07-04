@@ -9,7 +9,8 @@ import '@brainhubeu/react-carousel/lib/style.css';
 
 class movieDetail extends Component {
     state = {
-        images: []
+        images: [],
+        cast: [],
     }
 
     getMovieImg() {
@@ -20,9 +21,19 @@ class movieDetail extends Component {
             })
     }
 
+    getMovieCast() {
+        fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=4fbb4691e328ec322d3358761a861113&append_to_response=credits`)
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ cast: data.credits.cast.slice(0, 10) })
+            })
+    }
+
+
     componentDidMount() {
         this.props.getMovie(this.props.match.params.id);
         this.getMovieImg()
+        this.getMovieCast()
 
     }
 
@@ -50,9 +61,15 @@ class movieDetail extends Component {
                         <div className='movie__info'>
                             <h4 className="movie__title">{movie.original_title}</h4>
                             <p>{movie.overview}</p>
-                            <button className='movie__btn-back'>
-                                <Link to='/'>Back</Link>
-                            </button>
+                            <Link className='movie__btn-back' to='/'>Back</Link>
+                        </div>
+                        <div className='movie__cast'>
+                            {this.state.cast.map(item => <div className='movie__actor'>
+                                <img alt='actor_photo' src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}></img>
+                                <p className='actor__name'>{item.name}</p>
+                                <p className='actor__character'><strong>Character: </strong>{item.character}</p>
+                            </div>)}
+
                         </div>
                     </div>
 

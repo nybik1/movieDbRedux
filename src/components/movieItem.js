@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './movieitem.css';
 import { Link } from 'react-router-dom';
 

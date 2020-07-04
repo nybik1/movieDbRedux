@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Pagination, Spin } from 'antd';
 import { connect } from 'react-redux';
 import './App.css';
 import { loadMovies, searchMovies, } from './app/movies/actions';
 import {
-  BrowserRouter as Router, Switch, Route,
+  BrowserRouter as Router, Route,
 } from "react-router-dom";
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
@@ -16,13 +15,18 @@ import About from './components/About';
 
 class App extends Component {
 
-  state = {
-    isSearch: false
-  }
+  // state = {
+  //   isSearch: false
+  // }
+
+
 
   componentDidMount() {
     this.props.loadMovies();
   }
+
+
+
 
   searchHandler = (e) => {
     e.preventDefault();
@@ -30,23 +34,18 @@ class App extends Component {
     this.props.searchMovies({
       query: input.value,
     });
-    e.target[0].value = '';
-    this.setState({ isSearch: true });
+    // this.setState({ isSearch: true });
   }
 
-  handlePageChange = (page) => {
-    document.body.scrollIntoView();
-    if (this.state.isSearch) {
-      return this.props.searchMovies()
-    }
-    this.props.loadMovies({ page })
-
+  clearSearch = (e) => {
+    this.setState({ isSearch: false });
+    document.querySelector('.search__input').value = '';
+    this.props.loadMovies()
   }
-
 
 
   render() {
-    const { loading, error, total } = this.props;
+
     return (
       <Router>
         <Nav />
@@ -56,19 +55,11 @@ class App extends Component {
             <form onSubmit={this.searchHandler} >
               <input className='search__input' placeholder="Start enter movies name to search" />
             </form>
+            <button onClick={this.clearSearch}>Clear search</button>
           </div>
-          <React.Fragment>
-            {/* <div className='container'>
-            {loading && <Spin />}
-            {error && <h3>${error}</h3>}
-            {!loading && <MovieList></MovieList>}
-          </div> */}
-          </React.Fragment>
           <Route path='/' exact component={MovieList} />
           <Route path='/movie/:id' exact component={MovieDetails} />
           <Route path='/about' exact component={About} />
-          <Pagination defaultCurrent={1} total={total} pageSize={20} onChange={this.handlePageChange} />
-
         </div >
       </Router>
     );
@@ -82,4 +73,4 @@ export default connect(({ movies: { loading, error, total } }) => ({
   total,
 
 
-}), { loadMovies, searchMovies, })(App);  
+}), { loadMovies, searchMovies })(App);  
