@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    overflow: hidden;
     
 }
 
@@ -30,11 +31,11 @@
     justify-content: space-around;
 }
 
-.movie__wrapper{
-    display: flex;
-    max-height: 750px;
-    overflow: hidden;
+.movie__image{
+    max-width: 100%;
+    padding-right: 10px;
 }
+
 
 .movie__btn-back{
     width: 150px;
@@ -54,6 +55,7 @@
 
 .movie__actor{
     max-width: 100px;
+    height: 290px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -67,3 +69,29 @@
     margin-bottom: 0px;
 }
 
+.movie__addFav{
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+
+.movie__review-wrapper{
+    color: #fff;
+}
+
+.movie__review-author{
+    color: #fff;
+}
+
+.review{
+    height: 80px;
+    max-width: 1000px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.review.full {
+height: auto;
+overflow: visible;
+}

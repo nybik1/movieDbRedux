@@ -12,3 +12,7 @@
     justify-content: space-around;
     max-width: 300px;
 }
+
+.nav__item {
+    padding-left: 10px;
+}

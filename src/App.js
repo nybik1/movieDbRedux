@@ -5,10 +5,11 @@ import { loadMovies, searchMovies, } from './app/movies/actions';
 import {
   BrowserRouter as Router, Route,
 } from "react-router-dom";
-import MovieList from './components/MovieList';
+import MovieListWrapper from './components/MovieListWrapper';
 import MovieDetails from './components/MovieDetails';
 import Nav from './components/Nav';
 import About from './components/About';
+import FavoriteMovies from './components/Favorites';
 
 
 
@@ -23,25 +24,13 @@ class App extends Component {
 
   componentDidMount() {
     this.props.loadMovies();
+
+    if (!window.localStorage.getItem('favorites')) {
+      window.localStorage.setItem('favorites', '[]')
+    }
   }
 
 
-
-
-  searchHandler = (e) => {
-    e.preventDefault();
-    const [input] = e.target;
-    this.props.searchMovies({
-      query: input.value,
-    });
-    // this.setState({ isSearch: true });
-  }
-
-  clearSearch = (e) => {
-    this.setState({ isSearch: false });
-    document.querySelector('.search__input').value = '';
-    this.props.loadMovies()
-  }
 
 
   render() {
@@ -50,16 +39,10 @@ class App extends Component {
       <Router>
         <Nav />
         <div>
-          <div className='search'>
-            <h3 className='search__title'>Movie search</h3>
-            <form onSubmit={this.searchHandler} >
-              <input className='search__input' placeholder="Start enter movies name to search" />
-            </form>
-            <button onClick={this.clearSearch}>Clear search</button>
-          </div>
-          <Route path='/' exact component={MovieList} />
+          <Route path='/' exact component={MovieListWrapper} />
           <Route path='/movie/:id' exact component={MovieDetails} />
           <Route path='/about' exact component={About} />
+          <Route path='/favorites' exact component={FavoriteMovies} />
         </div >
       </Router>
     );

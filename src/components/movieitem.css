@@ -1,6 +1,6 @@
 .movie-block{
     max-width: 250px;
-    height: 750px;
+    height: 800px;
     margin-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
@@ -16,17 +16,70 @@
 .movie-title{
     color: #fff;
     text-align: center;
+    height: 50px;
+    padding-top: 10px;
 }
 
-.movie-descr{
+.ant-progress-circle .ant-progress-text {
+    color: #fff;
+}
+    
+
+
+/* .movie-descr{
     height: 200px;
     overflow: hidden;
     color: #fff;
     text-overflow: ellipsis;
-}
+} */
 
 .movie__button-wrapper{
     display: flex;
     max-width: 100%;
     justify-content: space-between;
 }
+
+.movie-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-wrapper{
+    display: inline-block;
+    max-width: 70px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    height: 200px;
+    line-height: 25px;
+}
+.ellipsis:before {
+	content:"";
+	float: left;
+	width: 5px; height: 200px; }
+
+.ellipsis > *:first-child {
+	float: right;
+	width: 100%;
+	margin-left: -5px; }		
+
+.ellipsis:after {
+	content: "\02026";  
+	box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	float: right; position: relative;
+	top: -25px; left: 100%; 
+	width: 3em; margin-left: -3em;
+	padding-right: 5px;
+
+	text-align: right;
+
+}
+
+.movie-data{
+    margin-top: 10px;
+}
+

@@ -6,25 +6,3 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-
-.search {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-}
-
-.search__title{
-    color: #fff;
-    font-size: 60px;
-}
-
-.search__input {
-    height: 30px;
-    width: 100%;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    font-size: 25px;
-    margin-bottom: 10px;
-}

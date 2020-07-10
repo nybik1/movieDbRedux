@@ -7,7 +7,7 @@ export const GET_MOVIE = 'movies/GET_MOVIE';
 
 
 
-export const loadMovies = ({ page } = {}) => (dispatch) => {
+export const loadMovies = ({ page = 1 } = {}) => (dispatch) => {
     dispatch({ type: LOAD_MOVIES_PENDING })
     axios(`https://api.themoviedb.org/3/discover/movie?api_key=4fbb4691e328ec322d3358761a861113&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}
     `)
@@ -15,7 +15,8 @@ export const loadMovies = ({ page } = {}) => (dispatch) => {
             dispatch({
                 type: LOAD_MOVIES_FULFILLED, payload: {
                     total: data.total_results,
-                    items: data.results
+                    items: data.results,
+                    page
                 }
             })
         })
@@ -25,13 +26,14 @@ export const loadMovies = ({ page } = {}) => (dispatch) => {
 }
 
 
-export const searchMovies = ({ query, page } = {}) => (dispatch) => {
+export const searchMovies = ({ query, page = 1 } = {}) => (dispatch) => {
     axios(`https://api.themoviedb.org/3/search/movie?api_key=4fbb4691e328ec322d3358761a861113&page=${page}&query=${query}`)
         .then(({ data }) => {
             dispatch({
                 type: SEARCH_MOVIES, payload: {
                     total: data.total_results,
-                    items: data.results
+                    items: data.results,
+                    page
                 }
             })
         })
