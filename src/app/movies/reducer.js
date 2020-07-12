@@ -9,33 +9,22 @@ import { SEARCH_MOVIES } from './actions';
 
 
 const initialState = {
-    list: {},
+    list: [],
     loaded: false,
     loading: false,
     error: null,
     total: 0,
     movie: {},
-    page: 0,
     isSearch: false,
 }
-
-// obj = {
-//     1: [],
-//     2: [],
-// }
-// Object.values(obj).reduce((acc, item) => { acc.push(...item): return acc; }, []);
 
 function movies(state = initialState, action) {
     switch (action.type) {
         case LOAD_MOVIES_FULFILLED:
             return {
                 ...state,
-                list: {
-                    ...state.list,
-                    [action.payload.page]: action.payload.items
-                },
+                list: action.payload.items,
                 total: action.payload.total,
-                page: action.payload.page,
                 loading: false,
                 isSearch: false,
             }
@@ -55,10 +44,7 @@ function movies(state = initialState, action) {
         case SEARCH_MOVIES:
             return {
                 ...state,
-                list: {
-                    ...state.list,
-                    [action.payload.page]: action.payload.items
-                },
+                list: action.payload.items,
                 total: action.payload.total,
                 loading: false,
                 isSearch: true,

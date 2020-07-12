@@ -38,8 +38,8 @@ class moviesList extends Component {
     }
 }
 
-export default connect(({ movies: { list, loading, error, isSearch, page } }) => ({
-    moviesList: list[page] || [],
+export default connect(({ movies: { list, loading, error, isSearch } }) => ({
+    moviesList: list,
     loading,
     error,
     isSearch,

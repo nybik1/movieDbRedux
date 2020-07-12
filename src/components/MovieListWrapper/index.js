@@ -17,9 +17,9 @@ class MovieListWrapper extends PureComponent {
 
     handlePageChange = (page) => {
         document.body.scrollIntoView();
-        const input = this.inputRef.current.value;
+        // const input = this.inputRef.current.value;
         if (this.state.isSearch) {
-            return this.props.searchMovies({ page, query: input })
+            return this.props.searchMovies({ page, query: this.state.inputValue })
         }
         this.props.loadMovies({ page })
 
@@ -32,13 +32,8 @@ class MovieListWrapper extends PureComponent {
             query: input.value,
         });
         this.setState({ isSearch: true });
-        // const isMovieListMounted = this.isListMounted;
-    }
-    // isListMounted = false
 
-    // isMovieListMounted = (isMounted) => {
-    //     this.isListMounted = isMounted
-    // }
+    }
 
     clearSearch = (e) => {
         this.setState({ isSearch: false, inputValue: '' });

@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router, Route,
 } from "react-router-dom";
 import MovieListWrapper from './components/MovieListWrapper';
-import MovieDetails from './components/MovieDetails';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 import Nav from './components/Nav';
 import About from './components/About';
 import FavoriteMovies from './components/Favorites';

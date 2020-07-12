@@ -6,43 +6,44 @@ import s from './style.module.scss';
 
 
 class FavoriteMovies extends Component {
-    state = {
-        favorites: []
-    }
+    // state = {
+    //     favorites: []
+    // }
 
-    componentDidMount() {
-        this.getFavorite()
-    }
+    // componentDidMount() {
+    //     this.getFavorite()
+    // }
 
 
 
-    getFavorite() {
-        if (!Object.keys(this.props.movieList).length) {
-            return [];
-        }
-        const favorites = window.JSON.parse(localStorage.getItem('favorites'));
-        const movieList = Object.values(this.props.movieList).reduce((acc, item) => { acc.push(...item); return acc; }, []);
-        let favoriteMovies = [];
-        favorites.forEach(function (elementOfFav) {
-            movieList.forEach(function (elementOfList) {
-                if (JSON.stringify(elementOfFav) === JSON.stringify(elementOfList.id)) {
-                    favoriteMovies.push(elementOfList)
-                }
-                console.log(favoriteMovies)
-                return favoriteMovies;
-            })
-        })
-        this.setState({ favorites: favoriteMovies })
-    }
+    // getFavorite() {
+    //     if (!Object.keys(this.props.movieList).length) {
+    //         return [];
+    //     }
+    //     const favorites = window.JSON.parse(localStorage.getItem('favorites'));
+    //     const movieList = Object.values(this.props.movieList).reduce((acc, item) => { acc.push(...item); return acc; }, []);
+    //     let favoriteMovies = [];
+    //     favorites.forEach(function (elementOfFav) {
+    //         movieList.forEach(function (elementOfList) {
+    //             if (JSON.stringify(elementOfFav) === JSON.stringify(elementOfList.id)) {
+    //                 favoriteMovies.push(elementOfList)
+    //             }
+    //             console.log(favoriteMovies)
+    //             return favoriteMovies;
+    //         })
+    //     })
+    //     this.setState({ favorites: favoriteMovies })
+    // }
 
     render() {
+        const favorites = window.JSON.parse(localStorage.getItem('favorites'));
         return (
             <div>
-                <div className={s.favorites__movie}>
-                    {this.state.favorites.map((movie) => <MovieItem key={movie.id}
-                        movie={movie}></MovieItem>)}
-                </div>
-                <Link className='movie__btn-back' to='/'>Back</Link>
+                {favorites.map(movie => <div>
+                    <MovieItem key={movie.id}
+                        movie={movie} >
+                    </MovieItem>))
+                </div>)}
             </div>
         )
     }

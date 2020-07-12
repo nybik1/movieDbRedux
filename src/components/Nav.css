@@ -4,6 +4,7 @@
     position: sticky;
     top: 0;
     font-size: 30px;
+    z-index: 6;
 }
 
 .nav__list{

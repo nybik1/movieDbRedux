@@ -10,16 +10,24 @@ function MovieItem(props) {
     const { movie } = props;
     return (
         <div key={movie.id} className='movie-block'>
-            <img alt='poster' width='230px' height='345px' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}></img>
+            {movie.poster_path && <img alt='poster' width='230px' height='345px' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />}
+            {!movie.poster_path && <img alt='poster' width='230px' height='345px' src='https://via.placeholder.com/230x345' />}
             <div className='movie-info'>
                 <h4 className='movie-title'>{movie.title}</h4>
                 <p className='movie-rating'>Movie rating:
-                    <div className='progress-wrapper'>
-                        <CircularProgressbar strokeWidth='5' value={movie.vote_average * 10} text={movie.vote_average}
+                {movie.vote_average &&
+                        <div className='progress-wrapper'>
+                            <CircularProgressbar strokeWidth='5' value={movie.vote_average * 10} text={movie.vote_average}
+                                styles={buildStyles({
+                                    textSize: '36px'
+                                })}></CircularProgressbar>
+                        </div>}
+                    {!movie.vote_average && <div className='progress-wrapper'>
+                        <CircularProgressbar strokeWidth='5' value='0' text='0'
                             styles={buildStyles({
                                 textSize: '36px'
                             })}></CircularProgressbar>
-                    </div>
+                    </div>}
                 </p>
                 <div className='ellipsis'>
                     <p className='movie-descr'> Movie description:{movie.overview}</p>
