@@ -24,14 +24,17 @@ export default function Reviews({ movieId }) {
             .then((data) => {
                 setReviews(data.results)
             })
-    }, []);
+    }, [movieId]);
 
     return (
         <div className={s.movie__reviews}>
             <h3 className={s.reviews__title}>Reviews</h3>
-            <div className={s.movie__reviewWrapper}>
-                {reviews.map(item => <ReviewItem item={item} />)}
-            </div>
+            {reviews.length === 0 && <p>There are no reviews</p>}
+            {reviews &&
+                <div className={s.movie__reviewWrapper}>
+                    {reviews.map(item => <ReviewItem key={item.id} item={item} />)}
+                </div>
+            }
         </div>
     )
 }

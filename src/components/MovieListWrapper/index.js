@@ -56,7 +56,7 @@ class MovieListWrapper extends PureComponent {
                 </div>
                 <MovieList />
                 <div className={s.pagination}>
-                    <Pagination defaultCurrent={1} total={this.props.total} pageSize={20} onChange={this.handlePageChange} />
+                    <Pagination defaultCurrent={1} total={this.props.total} pageSize={20} showSizeChanger={false} onChange={this.handlePageChange} />
                 </div>
             </div >
         )

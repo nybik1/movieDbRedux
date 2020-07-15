@@ -1,8 +1,8 @@
 .container{
-    max-width: 1210px;
+    max-width: 1310px;
     padding: 5px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }

@@ -6,6 +6,28 @@
     background-size: cover;
     background-position: center;
     position: relative;
+}
+
+.movie__wrapper_first{
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 5;
+    margin: auto;
+    width: 100%;
+    position: relative;
+}
+
+.movie__wrapper_first:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0,0,0, .7);
+    }
 
 .movie__poster{
     max-height: 450px;
@@ -47,38 +69,23 @@
     max-width: 900px;
 }
 
-.movie__title {
+.movie__titleWrapper {
     color: white;
     display: flex;
     align-items: center;
-    max-width: 300px;
+    max-width: 500px;
     justify-content: space-between;
 }
 
-.movie__title h4 {
+.movie__title {
     color: #fff;
-}
+    font-family: 'Arvo', serif;
+    font-weight: 700;
+    letter-spacing: 2px;
 
-.movie__wrapper_first{
-    padding: 10px 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    z-index: 5;
-    margin: auto;
-    width: 100%;
-    position: relative;
 }
-
-.movie__wrapper_first:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: rgba(0,0,0, .7);
-    }
+.overview__title{
+    color: #fff;
 }
 
 
@@ -98,6 +105,8 @@
     color: #fff;
     font-size: 37px;
     text-align: center;
+    font-family: 'Arvo', serif;
+    font-weight: 700;
 }
 
 .movie__image{
@@ -108,20 +117,23 @@
 
 
 .movie__btnBack{
-    width: 150px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 150px;
+    max-height: 50px;
     border-radius: 5px;
     background-color:rgba(0,0,0, .5);
     z-index: 2;
+}
+
+.overview__title{
+    font-family: 'Arvo', serif;
 }
 
 .movie__cast_title{
 color: #fff;
 font-size: 36px;
 text-align: center;
+font-family: 'Arvo', serif;
+font-weight: 700;
 }
 
 .movie__cast{
@@ -159,4 +171,12 @@ text-align: center;
 
 .movie__reviewAuthor{
     color: #fff;
+}
+
+
+.similar_review_wrapper{
+    display: grid;
+    column-gap: 50px;
+    justify-content: center;
+    grid-template-columns: 900px 600px;
 }

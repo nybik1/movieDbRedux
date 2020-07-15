@@ -10,8 +10,10 @@ import { Button, Modal } from 'antd';
 // import { Accordion, Card } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import Reviews from './../Reviews';
+import Similar from './../SimilarMovies';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import backBtn from './../../imgs/back.svg';
 
 
 
@@ -21,7 +23,6 @@ class movieDetail extends Component {
         images: [],
         cast: [],
         teaser: [],
-        reviews: [],
         visible: false,
     }
 
@@ -82,14 +83,25 @@ class movieDetail extends Component {
         this.setState({
             visible: false,
         });
+
     };
 
-    componentDidMount() {
+    loadMovieData() {
         this.props.getMovie(this.props.match.params.id);
         this.getMovieImg()
         this.getMovieCast()
         this.getMovieTeaser()
     }
+
+    componentDidMount() {
+        this.loadMovieData()
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.loadMovieData()
+        }
+    }
+
 
 
 
@@ -103,7 +115,7 @@ class movieDetail extends Component {
         return (
             <div>
                 <div className={s.movie}>
-                    <Link className={s.movie__btnBack} to='/'>Back</Link>
+                    <Link className={s.movie__btnBack} to='/'><img alt='btnBack' src={backBtn} /> </Link>
                     <div className={s.movie__wrapper_first} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${image.file_path})` }}>
                         <div className={s.poster_btn_wrapper}>
                             <div className={s.movie__poster}>
@@ -113,7 +125,7 @@ class movieDetail extends Component {
                                 <Button onClick={this.toggleFavorites(movie)} type='primary' className={s.movie__addFav}>{favoriteBtnText}</Button>
                                 <div className={s.movie__trailer}>
                                     <Button type='primary' onClick={this.showModal}>Watch trailer</Button>
-                                    {this.state.teaser.map(item =>
+                                    {this.state.visible && this.state.teaser.map(item =>
                                         <Modal width='960px' footer={null} title={this.props.movie.original_title} visible={this.state.visible} onCancel={this.closeModal}>
                                             <iframe title='video' width='100%' height='480px'
                                                 src={`https://www.youtube.com/embed/${item.key}`}
@@ -124,8 +136,8 @@ class movieDetail extends Component {
                             </div>
                         </div>
                         <div className={s.movie__info}>
-                            <div className={s.movie__title}>
-                                <h4>{movie.original_title}</h4>
+                            <div className={s.movie__titleWrapper}>
+                                <h4 className={s.movie__title}>{movie.original_title}</h4>
                                 <div className={s.progressWwrapper}>
                                     <CircularProgressbar strokeWidth='5' value={movie.vote_average * 10} text={movie.vote_average}
                                         styles={buildStyles({
@@ -146,11 +158,13 @@ class movieDetail extends Component {
                             <Carousel
                                 centered
                                 slidesPerPage={3}
+                                slidesPerScroll={2}
                                 infinite
-                                // autoPlay={2000}
-                                animationSpeed={1000}>
+                                lazyLoad
+                                autoPlay={5000}
+                                animationSpeed={3000}>
                                 {this.state.images.map(item =>
-                                    <img className={s.movie__image} alt='movie img' src={`https://image.tmdb.org/t/p/w500/${item.file_path}`}></img>
+                                    <img className={s.movie__image} key={movie.id} alt='movie img' src={`https://image.tmdb.org/t/p/w500/${item.file_path}`}></img>
 
                                 )}
                             </Carousel>
@@ -159,11 +173,13 @@ class movieDetail extends Component {
                             <h3 className={s.movie__cast_title}>Movies cast</h3>
                             <Carousel
                                 slidesPerPage={10}
+                                slidesPerScroll={5}
                                 infinite
-                                // autoPlay={2000}
-                                animationSpeed={1000}>
+                                lazyLoad
+                                autoPlay={5000}
+                                animationSpeed={3000}>
                                 {this.state.cast.map(item =>
-                                    <div className={s.movie__actor}>
+                                    <div key={item.id} className={s.movie__actor}>
                                         {item.profile_path && <img alt='actor_photo' src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`} />}
                                         {!item.profile_path && <img src='https://via.placeholder.com/100x150' alt='noimg' />}
                                         <p className={s.actor__name}>{item.name}</p>
@@ -171,8 +187,10 @@ class movieDetail extends Component {
                                     </div>)}
                             </Carousel>
                         </div>
-
-                        <Reviews movieId={movieId} />
+                        <div className={s.similar_review_wrapper}>
+                            <Reviews movieId={movieId} />
+                            <Similar movieId={movieId} />
+                        </div>
                     </div >
                 </div>
             </div >

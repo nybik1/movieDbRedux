@@ -1,29 +1,35 @@
 .movie-block{
-    max-width: 250px;
-    height: 800px;
+    max-width: 300px;
+    height: 850px;
     margin-bottom: 20px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     border-radius: 1%;
+    -webkit-box-shadow: 0px 0px 35px 0px rgba(0,40,161,1);
+    -moz-box-shadow: 0px 0px 35px 0px rgba(0,40,161,1);
+    box-shadow: 0px 0px 35px 0px rgba(0,40,161,1);
+    text-align: center;
 }
 .movie-block img {
     max-width: 100%;
+    border-radius: 5px;
 }
 
 .movie-info{
     color: #fff;
+    font-family: 'Arvo', serif;
+    text-align: left;
 }
 .movie-title{
     color: #fff;
     text-align: center;
-    height: 50px;
+    height: 100px;
     padding-top: 10px;
+    font-family: 'Arvo', serif;
+    font-weight: 700;
+    font-size: 20px;
 }
 
-.ant-progress-circle .ant-progress-text {
-    color: #fff;
-}
-    
 
 
 /* .movie-descr{
@@ -43,6 +49,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Arvo', serif;
 }
 
 .progress-wrapper{
@@ -81,5 +88,6 @@
 
 .movie-data{
     margin-top: 10px;
+    font-family: 'Arvo', serif;
 }
 

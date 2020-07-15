@@ -3,6 +3,8 @@ import './movieitem.css';
 import { Link } from 'react-router-dom';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 function MovieItem(props) {
@@ -10,8 +12,8 @@ function MovieItem(props) {
     const { movie } = props;
     return (
         <div key={movie.id} className='movie-block'>
-            {movie.poster_path && <img alt='poster' width='230px' height='345px' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />}
-            {!movie.poster_path && <img alt='poster' width='230px' height='345px' src='https://via.placeholder.com/230x345' />}
+            {movie.poster_path && <LazyLoadImage alt={'moviePoster'} src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} width={250} height={345} effect='blur' />}
+            {!movie.poster_path && <LazyLoadImage alt={'moviePoster'} src={`https://via.placeholder.com/230x345`} width={250} height={345} effect='blur' />}
             <div className='movie-info'>
                 <h4 className='movie-title'>{movie.title}</h4>
                 <p className='movie-rating'>Movie rating:
@@ -19,15 +21,18 @@ function MovieItem(props) {
                         <div className='progress-wrapper'>
                             <CircularProgressbar strokeWidth='5' value={movie.vote_average * 10} text={movie.vote_average}
                                 styles={buildStyles({
-                                    textSize: '36px'
+                                    textSize: '36px',
+                                    pathColor: "rgba(0,40,161,1)"
                                 })}></CircularProgressbar>
                         </div>}
-                    {!movie.vote_average && <div className='progress-wrapper'>
-                        <CircularProgressbar strokeWidth='5' value='0' text='0'
-                            styles={buildStyles({
-                                textSize: '36px'
-                            })}></CircularProgressbar>
-                    </div>}
+                    {!movie.vote_average &&
+                        <div className='progress-wrapper'>
+                            <CircularProgressbar strokeWidth='5' value='0' text='0'
+                                styles={buildStyles({
+                                    textSize: '36px',
+                                    pathColor: "rgba(0,40,161,1)"
+                                })}></CircularProgressbar>
+                        </div>}
                 </p>
                 <div className='ellipsis'>
                     <p className='movie-descr'> Movie description:{movie.overview}</p>
