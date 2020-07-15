@@ -84,6 +84,19 @@
     letter-spacing: 2px;
 
 }
+
+.movie__genres {
+    display: flex;
+    max-width: 200px;
+    justify-content: space-between;
+    font-size: 16px;
+    font-family: 'Work Sans', sans-serif;
+
+}
+.movie__genre {
+    padding-right: 5px;
+}
+
 .overview__title{
     color: #fff;
 }

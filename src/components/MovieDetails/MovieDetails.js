@@ -111,6 +111,7 @@ class movieDetail extends Component {
         const isMovieInFavorites = JSON.parse(window.localStorage.getItem('favorites')).find(item => item.id === movie.id)
         const favoriteBtnText = isMovieInFavorites ? 'Remove from favorites' : 'Add to favorites';
         const [image = {}] = this.state.images;
+        console.log(movie.genres)
 
         return (
             <div>
@@ -144,6 +145,9 @@ class movieDetail extends Component {
                                             textSize: '36px'
                                         })}></CircularProgressbar>
                                 </div>
+                            </div>
+                            <div className={s.movie__genres}>
+                                {movie.genres && movie.genres.map(item => <p className={s.movie__genre}>{item.name}</p>)}
                             </div>
                             <p>{movie.tagline}</p>
                             <div className={s.movie__overview}>
