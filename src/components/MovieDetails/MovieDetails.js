@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getMovie } from '../../app/movies/actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import s from './style.module.scss';
 import 'antd/dist/antd.css';
 import Carousel from '@brainhubeu/react-carousel';
@@ -14,6 +14,7 @@ import Similar from './../SimilarMovies';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import backBtn from './../../imgs/back.svg';
+import cs from 'classnames';
 
 
 
@@ -24,6 +25,7 @@ class movieDetail extends Component {
         cast: [],
         teaser: [],
         visible: false,
+        isFavorite: false,
     }
 
     getMovieImg() {
@@ -56,9 +58,11 @@ class movieDetail extends Component {
         const index = favorites.findIndex(item => item.id === this.props.movie.id);
         if (index !== -1) {
             favorites.splice(index, 1)
+            this.setState({ isFavorite: false })
         }
         else {
             favorites.push(movie)
+            this.setState({ isFavorite: true })
         };
         window.localStorage.setItem('favorites', JSON.stringify(favorites));
         this.forceUpdate();
@@ -123,7 +127,8 @@ class movieDetail extends Component {
                                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt='img'></img>
                             </div>
                             <div className={s.movie_action_wrapper}>
-                                <Button onClick={this.toggleFavorites(movie)} type='primary' className={s.movie__addFav}>{favoriteBtnText}</Button>
+                                {/* <button onClick={this.toggleFavorites(movie)} className={cs(s.addFavorite, ({ [s.inFavorites]: !this.state.isFavorite }))}> {favoriteBtnText}</button> */}
+                                <Button onClick={this.toggleFavorites(movie)} type='primary'>{favoriteBtnText}</Button>
                                 <div className={s.movie__trailer}>
                                     <Button type='primary' onClick={this.showModal}>Watch trailer</Button>
                                     {this.state.visible && this.state.teaser.map(item =>
@@ -147,7 +152,7 @@ class movieDetail extends Component {
                                 </div>
                             </div>
                             <div className={s.movie__genres}>
-                                {movie.genres && movie.genres.map(item => <p className={s.movie__genre}>{item.name}</p>)}
+                                {movie.movie && movie.genres.map(item => <p className={s.movie__genre}>{item.name}</p>)}
                             </div>
                             <p>{movie.tagline}</p>
                             <div className={s.movie__overview}>
