@@ -1,7 +1,7 @@
 .favorites__movie{
     max-width: 1310px;
-    display: grid;
-    grid-template-columns: 300px 300px 300px 300px;
+    display: flex;
     margin: auto;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

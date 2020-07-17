@@ -7,9 +7,11 @@ import {
 } from "react-router-dom";
 import MovieListWrapper from './components/MovieListWrapper';
 import MovieDetails from './components/MovieDetails/MovieDetails';
-import Nav from './components/Nav';
+// import Nav from './components/Nav';
 import About from './components/About';
 import FavoriteMovies from './components/Favorites';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -37,13 +39,10 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
-          <Nav />
-          <Route path='/' exact component={MovieListWrapper} />
-          <Route path='/movie/:id' exact component={MovieDetails} />
-          <Route path='/about' exact component={About} />
-          <Route path='/favorites' exact component={FavoriteMovies} />
-        </div >
+        <Route path='/' exact component={MovieListWrapper} />
+        <Route path='/movie/:id' exact component={MovieDetails} />
+        <Route path='/about' exact component={About} />
+        <Route path='/favorites' exact component={FavoriteMovies} />
       </Router>
     );
   }

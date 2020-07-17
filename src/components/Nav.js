@@ -1,16 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
+import { elastic as Menu } from 'react-burger-menu';
 
 
-export default function navigation() {
-    return (
-        <nav className='nav'>
-            <ul className='nav__list'>
-                <li className='nav__item' ><Link to='/'>Home</Link></li>
-                <li className='nav__item' ><Link to='/about'>About</Link></li>
-                <li className='nav__item' ><Link to='/favorites'>Favorites</Link></li>
-            </ul>
-        </nav>
-    )
+
+class Navigation extends React.Component {
+
+    state = {
+        menuOpen: false
+    }
+
+    closeMenu() {
+        this.setState({ menuOpen: false })
+    }
+
+    handleStateChange(state) {
+        this.setState({ menuOpen: state.isOpen })
+    }
+
+    render() {
+        return (
+            <Menu isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)} pageWrapId='wrapper' outerContainerId='root'>
+                <Link to='/' id="home" className="menu-item" href="/" onClick={() => this.closeMenu()}>Home</Link>
+                <Link to='/favorites' id="home" className="menu-item" href="/" onClick={() => this.closeMenu()}>Favorites</Link>
+                <Link to='/about' id="home" className="menu-item" href="/" onClick={() => this.closeMenu()}>About</Link>
+            </Menu>
+        )
+    }
 }
+export default Navigation;

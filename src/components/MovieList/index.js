@@ -9,6 +9,7 @@ import s from './style.module.scss';
 
 
 
+
 class moviesList extends Component {
 
     // componentDidMount() {
@@ -25,15 +26,17 @@ class moviesList extends Component {
 
 
         return (
-            <div className='container'>
-                {loading && <div className={s.spinner}><Spin indicator={antIcon} /></div>}
-                {error && <h3>${error}</h3>}
-                {!loading && <div className={s.movie_list}>
-                    {this.props.moviesList.map((movie) => (
-                        <MovieItem key={movie.id}
-                            movie={movie} >
-                        </MovieItem>))}
-                </div >}
+            <div>
+                <div className='container'>
+                    {loading && <div className={s.spinner}><Spin indicator={antIcon} /></div>}
+                    {error && <h3>${error}</h3>}
+                    {!loading && <div className={s.movie_list}>
+                        {this.props.moviesList.map((movie) => (
+                            <MovieItem key={movie.id}
+                                movie={movie} >
+                            </MovieItem>))}
+                    </div >}
+                </div>
             </div>
         )
     }
