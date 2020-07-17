@@ -37,8 +37,8 @@ class App extends Component {
 
     return (
       <Router>
-        <Nav />
         <div>
+          <Nav />
           <Route path='/' exact component={MovieListWrapper} />
           <Route path='/movie/:id' exact component={MovieDetails} />
           <Route path='/about' exact component={About} />

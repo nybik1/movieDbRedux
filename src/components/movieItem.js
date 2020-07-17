@@ -5,7 +5,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
+import { Button } from 'antd';
 
 function MovieItem(props) {
 
@@ -40,11 +40,11 @@ function MovieItem(props) {
                 <p className='movie-data'>Movie data release:{movie.release_date}</p>
                 <div className='movie__button-wrapper'>
                     <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/movie/${movie.id}`}>
-                        <button>Check movie</button>
+                        <Button type='primary'>Check movie</Button>
                     </a>
-                    <button>
+                    <Button type='primary'>
                         <Link to={'/movie/' + movie.id} className='movie__details'>Details</Link>
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div >

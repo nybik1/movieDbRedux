@@ -8,6 +8,7 @@ import s from './style.module.scss';
 
 
 
+
 class moviesList extends Component {
 
     // componentDidMount() {

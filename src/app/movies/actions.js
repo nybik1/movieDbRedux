@@ -40,6 +40,7 @@ export const searchMovies = ({ query, page } = {}) => (dispatch) => {
 
 
 export const getMovie = (id) => (dispatch) => {
+    dispatch({ type: LOAD_MOVIES_PENDING })
     axios(`https://api.themoviedb.org/3/movie/${id}?api_key=4fbb4691e328ec322d3358761a861113`)
         .then(({ data }) => {
             dispatch({

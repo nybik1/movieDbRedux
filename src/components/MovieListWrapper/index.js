@@ -4,7 +4,6 @@ import s from './style.module.scss';
 import { Pagination, Button, Input } from 'antd';
 import { connect } from 'react-redux';
 import { loadMovies, searchMovies } from '../../app/movies/actions';
-
 class MovieListWrapper extends PureComponent {
 
     state = {

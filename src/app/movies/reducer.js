@@ -52,7 +52,8 @@ function movies(state = initialState, action) {
         case GET_MOVIE:
             return {
                 ...state,
-                movie: action.payload
+                movie: action.payload,
+                loading: false
             }
         default:
             return state
