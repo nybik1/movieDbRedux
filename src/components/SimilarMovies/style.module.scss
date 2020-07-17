@@ -2,7 +2,7 @@
 display: grid;
 grid-template-columns: minmax(0px,200px) minmax(0px,200px) minmax(0px,200px);
 gap: 10px;
-@media screen and (max-width:550px) {
+@media screen and (max-width:1024px) {
     max-width: 900px;
     display: flex;
     flex-direction: row;
@@ -12,16 +12,14 @@ gap: 10px;
 }
 }
 
-.moviePosterWrapper {
-    max-width: 180px;
-}
 .moviePosterWrapper img {
     max-width: 100%;
 }
 
 .similarMovie {
     cursor: pointer;
-    max-width: 100%;
+    width: 200px;
+    margin-bottom: 10px;
 }
 
 .similarMovie img {

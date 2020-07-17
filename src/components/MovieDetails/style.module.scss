@@ -206,7 +206,7 @@ font-weight: 700;
     justify-content: center;
     grid-template-columns: minmax(200px, 900px) minmax(200px, 600px);
 
-    @media screen and (max-width:970px) {
+    @media screen and (max-width:1024px) {
         display: flex;
         flex-direction: column;
     }

@@ -31,14 +31,6 @@
 }
 
 
-
-/* .movie-descr{
-    height: 200px;
-    overflow: hidden;
-    color: #fff;
-    text-overflow: ellipsis;
-} */
-
 .movie__button-wrapper{
     display: flex;
     max-width: 100%;
@@ -89,5 +81,10 @@
 .movie-data{
     margin-top: 10px;
     font-family: 'Arvo', serif;
+}
+
+
+@media screen and (max-width:1024px) {
+    .movie-block{max-width: 260px;}
 }
 
